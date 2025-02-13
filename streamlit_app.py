@@ -42,8 +42,20 @@ def get_data():
 
     return final_df
 
+#create the dataframe from the csv file
 df = get_data()
 
+#train the model on the data with the hyperparameter tuned model specifications
+def model(df):
+
+    X = df[[['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']]]
+    y = df['outbreak']
+
+    classifier = LogisticRegression(solver='liblinear', max_iter=100, C=1)
+
+    res = classifier.fit(X , y)
+
+    return res
 
 # -----------------------------------------------------------------------------
 # Draw the actual page
@@ -51,7 +63,7 @@ df = get_data()
 # Set the title that appears at the top of the page.
 '''
 # Malaria Outbreak Predictor
-# :Mosquito
+# :mosquito
 This model predicts the outbreak of malaria in Sudan
 
 '''
@@ -62,6 +74,7 @@ below is a test to see if the data is uploading
 '''
 
 st.write(df.head())
+st.write(df.shape)
 # Add some spacing
 ''
 ''
