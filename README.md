@@ -4,7 +4,7 @@ this repository is for an omdena project
 
 to dos:
 
-use plost to create a Sudanese heatmap where the color corresponds to probability of Malaria outbreak
+use plost to create a Sudanese heatmap where the color corresponds to probability of Malaria outbreak  (https://github.com/tvst/plost)
 
 add tuberculosis model
 
