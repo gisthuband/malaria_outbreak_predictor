@@ -8,4 +8,6 @@ use plost to create a Sudanese heatmap where the color corresponds to probabilit
 
 add tuberculosis model
 
+explain ndvi and ndwi values on the front end
+
 
