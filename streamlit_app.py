@@ -3,6 +3,7 @@ import pandas as pd
 import math
 from pathlib import Path
 import sklearn.model_selection
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.linear_model import LogisticRegression
@@ -80,13 +81,16 @@ st.write(df.shape)
 ''
 
 
-#user_text1 = st.text_area('input protein sequence 1')
-#st.write(user_text1)
+ndvi = st.text_area('please provide the ndvi value of Sudan')
+st.write(ndvi)
 
-#user_text2 = st.text_area('input protein sequence 2')
-#st.write(user_text2)
+ndwi = st.text_area('please provide the ndwi value of Sudan')
+st.write(ndwi)
 
-#seqs = [user_text1, user_text2]
+month = st.text_area('please provide the month of the year you are looking for (1-12)?')
+
+inputs = np.array([float(ndvi), float(ndwi), int(month), 0 ,0 ,0 ,1])
+st.write(inputs)
 
 ''
 ''
