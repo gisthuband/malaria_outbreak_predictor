@@ -2,13 +2,15 @@ import streamlit as st
 import pandas as pd
 import math
 from pathlib import Path
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import GridSearchCV
-from sklearn import preprocessing
-from sklearn.ensemble import RandomForestClassifier
+import sklearn.model_selection
 from sklearn.model_selection import train_test_split
-import numpy as np
-from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+from sklearn.model_selection import KFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.model_selection import GridSearchCV
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
@@ -34,7 +36,11 @@ def get_data():
 
     df = df.drop(columns= 'Unnamed: 0')
 
-    return df
+    one_hots = pd.get_dummies(df['GEO_NAME_SHORT'])
+
+    final_df = pd.concat([df, one_hots], axis=1)
+
+    return final_df
 
 df = get_data()
 
@@ -45,7 +51,7 @@ df = get_data()
 # Set the title that appears at the top of the page.
 '''
 # Malaria Outbreak Predictor
-# :mosquito
+# :Mosquito
 This model predicts the outbreak of malaria in Sudan
 
 '''
