@@ -13,7 +13,7 @@ from sklearn.metrics import classification_report, confusion_matrix, roc_curve, 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='Malaria Outbreak Predictor',
-    page_icon=':Mosquito', # This is an emoji shortcode. Could be a URL too.
+    page_icon=':mosquito', # This is an emoji shortcode. Could be a URL too.
 )
 
 # -----------------------------------------------------------------------------
@@ -45,7 +45,7 @@ df = get_data()
 # Set the title that appears at the top of the page.
 '''
 # Malaria Outbreak Predictor
-# :Mosquito
+# :mosquito
 This model predicts the outbreak of malaria in Sudan
 
 '''
