@@ -140,6 +140,8 @@ function evaluatePixel(sample) {
 }
 """
 
+
+
 def get_satellite_index(bbox, evalscript, month, year):
     #"""Fetch NDVI or NDWI data from SentinelHub"""
     request = SentinelHubRequest(
@@ -162,6 +164,10 @@ st.title("🌍 NDVI & NDWI Map of Sudan")
 st.sidebar.header("Select Map Type")
 
 # Get NDVI and NDWI data
+ndvi_data = None
+ndwi_data = None
+ndvi_norm = None
+ndwi_norm = None
 
 if month and year:
     ndvi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDVI)
