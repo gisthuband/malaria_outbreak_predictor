@@ -21,6 +21,7 @@ import rasterio
 from streamlit_folium import folium_static
 from folium.plugins import HeatMap
 from sentinelhub import SHConfig, SentinelHubRequest, DataCollection, MimeType, BBox, CRS
+from streamlit.components.v1 import html
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
@@ -96,13 +97,13 @@ st.write(ndvi)
 ndwi = st.number_input('please provide the ndwi value of Sudan')
 st.write(ndwi)
 
-month = st.number_input('please provide the month of the year you are looking for (1-12)?')
+month = st.number_input('please provide the month of the year you are looking for (1-12)')
+year = st.number_input('please provide the year that you are looking for)
 
 inputs = np.array([float(ndvi), float(ndwi), int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
 
-''
-''
+
 
 
 # SentinelHub API Config
@@ -139,14 +140,14 @@ function evaluatePixel(sample) {
 }
 """
 
-def get_satellite_index(bbox, evalscript, start, stop):
+def get_satellite_index(bbox, evalscript, month, year):
     #"""Fetch NDVI or NDWI data from SentinelHub"""
     request = SentinelHubRequest(
         evalscript=evalscript,
         input_data=[
             SentinelHubRequest.input_data(
                 data_collection=DataCollection.SENTINEL2_L2A,
-                time_interval=(start, stop),  # Adjust as needed
+                time_interval=(f'{month}'+'-01-'+f{year}, f'{month}'+'-28-'+f'{year}'),  # Adjust as needed
             )
         ],
         responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
