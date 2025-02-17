@@ -170,8 +170,8 @@ ndvi_norm = None
 ndwi_norm = None
 
 if month and year:
-    ndvi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDVI)
-    ndwi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDWI)
+    ndvi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDVI, month, year)
+    ndwi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDWI, month, year)
 
 # Normalize Data
     ndvi_norm = (ndvi_data - np.min(ndvi_data)) / (np.max(ndvi_data) - np.min(ndvi_data))
