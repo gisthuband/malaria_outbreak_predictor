@@ -1,3 +1,5 @@
+#imports
+
 import streamlit as st
 import pandas as pd
 import math
@@ -12,6 +14,13 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.model_selection import GridSearchCV
+import streamlit as st
+import folium
+import numpy as np
+import rasterio
+from streamlit_folium import folium_static
+from folium.plugins import HeatMap
+from sentinelhub import SHConfig, SentinelHubRequest, DataCollection, MimeType, BBox, CRS
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
@@ -81,13 +90,13 @@ st.write(df.shape)
 ''
 
 
-ndvi = st.text_area('please provide the ndvi value of Sudan')
+ndvi = st.number_input('please provide the ndvi value of Sudan')
 st.write(ndvi)
 
-ndwi = st.text_area('please provide the ndwi value of Sudan')
+ndwi = st.number_input('please provide the ndwi value of Sudan')
 st.write(ndwi)
 
-month = st.text_area('please provide the month of the year you are looking for (1-12)?')
+month = st.number_input('please provide the month of the year you are looking for (1-12)?')
 
 inputs = np.array([float(ndvi), float(ndwi), int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
@@ -96,61 +105,85 @@ st.write(inputs)
 ''
 
 
+# SentinelHub API Config
+config = SHConfig()
+config.sh_client_id = "sh-dcb370a5-45c8-493f-b0fb-b189adb4be33"  # Replace with your SentinelHub Client ID
+config.sh_client_secret = "F2bbee2gwHyeFiKMkhuzXZunycBI21op"  # Replace with your SentinelHub Client Secret
 
-#merged = None
+# Sudan Bounding Box
+SUDAN_BBOX = BBox(bbox=(21.8, 8.7, 39.0, 23.1), crs=CRS.WGS84)
 
-#if user_text1 and user_text2:
+# NDVI Evalscript
+EVALSCRIPT_NDVI = """
+function setup() {
+    return {
+        input: ["B04", "B08"],
+        output: { bands: 1 }
+    };
+}
+function evaluatePixel(sample) {
+    return [(sample.B08 - sample.B04) / (sample.B08 + sample.B04)];
+}
+"""
 
-#    merged = seq_features(seqs)
+# NDWI Evalscript
+EVALSCRIPT_NDWI = """
+function setup() {
+    return {
+        input: ["B08", "B11"],
+        output: { bands: 1 }
+    };
+}
+function evaluatePixel(sample) {
+    return [(sample.B08 - sample.B11) / (sample.B08 + sample.B11)];
+}
+"""
 
-#    st.write('the following are the features generated from the protein pair')
+def get_satellite_index(bbox, evalscript, start, stop):
+    #"""Fetch NDVI or NDWI data from SentinelHub"""
+    request = SentinelHubRequest(
+        evalscript=evalscript,
+        input_data=[
+            SentinelHubRequest.input_data(
+                data_collection=DataCollection.SENTINEL2_L2A,
+                time_interval=(start, stop),  # Adjust as needed
+            )
+        ],
+        responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
+        bbox=bbox,
+        config=config
+    )
+    response = request.get_data()
+    return np.squeeze(response) if response else None  # Convert to NumPy array
 
-''
-''
-#st.write(merged)
+# Streamlit App
+st.title("🌍 NDVI & NDWI Map of Sudan")
+st.sidebar.header("Select Map Type")
 
+# Get NDVI and NDWI data
+ndvi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDVI)
+ndwi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDWI)
 
+# Normalize Data
+ndvi_norm = (ndvi_data - np.min(ndvi_data)) / (np.max(ndvi_data) - np.min(ndvi_data))
+ndwi_norm = (ndwi_data - np.min(ndwi_data)) / (np.max(ndwi_data) - np.min(ndwi_data))
 
+# Select visualization type
+map_type = st.sidebar.radio("Choose Map Type:", ["NDVI", "NDWI", "Both"])
 
-#if merged:
+# Create Folium Map
+m = folium.Map(location=[15.5, 32.5], zoom_start=5)
 
-#    ready_data = standard(usable_df, merged)
+# Add NDVI as Heatmap
+if map_type in ["NDVI", "Both"]:
+    HeatMap(ndvi_norm, name="NDVI", gradient={0: "red", 0.5: "yellow", 1: "green"}).add_to(m)
 
-#    st.write('data is loading')
+# Add NDWI as Contour or Heatmap
+if map_type in ["NDWI", "Both"]:
+    HeatMap(ndwi_norm, name="NDWI", gradient={0: "white", 0.5: "blue", 1: "darkblue"}, radius=10).add_to(m)
 
+# Add Layer Control
+folium.LayerControl().add_to(m)
 
-#def rfc(data):
-
-#    rfc = RandomForestClassifier(criterion='entropy', n_estimators=500)
-
-#    rfc = rfc.fit(data[0], data[1])
-
-#    return rfc
-
-
-#model = None
-
-#if ready_data != None:
-
-#    model = rfc(ready_data)
-
-#    st.write('model is training')
-
-
-
-
-#if model != None:
-
-#    merged = np.array(merged)
-
-#    merged = merged.reshape(1, -1)
-
-#    res = model.predict(merged)
-
-#    prob = model.predict_proba(merged)
-
-#    st.write('model is predicting')
-
-#    st.write(res)
-
-#    st.write('percent chance is: ', prob)
+# Display the Map
+folium_static(m)
