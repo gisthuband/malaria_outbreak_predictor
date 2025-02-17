@@ -178,21 +178,21 @@ if month and year:
     ndwi_norm = (ndwi_data - np.min(ndwi_data)) / (np.max(ndwi_data) - np.min(ndwi_data))
 
 # Select visualization type
-map_type = st.sidebar.radio("Choose Map Type:", ["NDVI", "NDWI", "Both"])
+    map_type = st.sidebar.radio("Choose Map Type:", ["NDVI", "NDWI", "Both"])
 
 # Create Folium Map
-m = folium.Map(location=[15.5, 32.5], zoom_start=5)
+    m = folium.Map(location=[15.5, 32.5], zoom_start=5)
 
 # Add NDVI as Heatmap
-if map_type in ["NDVI", "Both"]:
-    HeatMap(ndvi_norm, name="NDVI", gradient={0: "red", 0.5: "yellow", 1: "green"}).add_to(m)
-
-# Add NDWI as Contour or Heatmap
-if map_type in ["NDWI", "Both"]:
-    HeatMap(ndwi_norm, name="NDWI", gradient={0: "white", 0.5: "blue", 1: "darkblue"}, radius=10).add_to(m)
-
-# Add Layer Control
-folium.LayerControl().add_to(m)
-
-# Display the Map
-folium_static(m)
+    if map_type in ["NDVI", "Both"]:
+        HeatMap(ndvi_norm, name="NDVI", gradient={0: "red", 0.5: "yellow", 1: "green"}).add_to(m)
+    
+    # Add NDWI as Contour or Heatmap
+    if map_type in ["NDWI", "Both"]:
+        HeatMap(ndwi_norm, name="NDWI", gradient={0: "white", 0.5: "blue", 1: "darkblue"}, radius=10).add_to(m)
+    
+    # Add Layer Control
+    folium.LayerControl().add_to(m)
+    
+    # Display the Map
+    folium_static(m)
