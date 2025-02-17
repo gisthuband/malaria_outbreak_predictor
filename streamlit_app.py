@@ -147,7 +147,7 @@ def get_satellite_index(bbox, evalscript, month, year):
         input_data=[
             SentinelHubRequest.input_data(
                 data_collection=DataCollection.SENTINEL2_L2A,
-                time_interval=(f'{month}-01-{year}', f'{month}-28-{year}'),  # Adjust as needed
+                time_interval=(f'{int(month)}-01-{int(year)}', f'{int(month)}-28-{int(year)}'),  # Adjust as needed
             )
         ],
         responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
@@ -162,8 +162,10 @@ st.title("🌍 NDVI & NDWI Map of Sudan")
 st.sidebar.header("Select Map Type")
 
 # Get NDVI and NDWI data
-ndvi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDVI)
-ndwi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDWI)
+
+if month and year:
+    ndvi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDVI)
+    ndwi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDWI)
 
 # Normalize Data
 ndvi_norm = (ndvi_data - np.min(ndvi_data)) / (np.max(ndvi_data) - np.min(ndvi_data))
