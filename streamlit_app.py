@@ -168,8 +168,8 @@ if month and year:
     ndwi_data = get_satellite_index(SUDAN_BBOX, EVALSCRIPT_NDWI)
 
 # Normalize Data
-ndvi_norm = (ndvi_data - np.min(ndvi_data)) / (np.max(ndvi_data) - np.min(ndvi_data))
-ndwi_norm = (ndwi_data - np.min(ndwi_data)) / (np.max(ndwi_data) - np.min(ndwi_data))
+    ndvi_norm = (ndvi_data - np.min(ndvi_data)) / (np.max(ndvi_data) - np.min(ndvi_data))
+    ndwi_norm = (ndwi_data - np.min(ndwi_data)) / (np.max(ndwi_data) - np.min(ndwi_data))
 
 # Select visualization type
 map_type = st.sidebar.radio("Choose Map Type:", ["NDVI", "NDWI", "Both"])
