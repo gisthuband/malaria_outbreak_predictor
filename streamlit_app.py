@@ -147,7 +147,7 @@ def get_satellite_index(bbox, evalscript, month, year):
         input_data=[
             SentinelHubRequest.input_data(
                 data_collection=DataCollection.SENTINEL2_L2A,
-                time_interval=(f'{month}'+'-01-'+f{year}, f'{month}'+'-28-'+f'{year}'),  # Adjust as needed
+                time_interval=(f'{month}-01-{year}', f'{month}-28-{year}'),  # Adjust as needed
             )
         ],
         responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
