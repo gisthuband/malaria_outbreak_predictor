@@ -98,7 +98,7 @@ ndwi = st.number_input('please provide the ndwi value of Sudan')
 st.write(ndwi)
 
 month = st.number_input('please provide the month of the year you are looking for (1-12)')
-year = st.number_input('please provide the year that you are looking for)
+year = st.number_input('please provide the year that you are looking for')
 
 inputs = np.array([float(ndvi), float(ndwi), int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
