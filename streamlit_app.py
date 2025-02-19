@@ -119,7 +119,7 @@ def forecaster(month, year, df):
     ndvi_pred.head()
 
     #ndvi_val = ndvi_pred.loc[-1, 'yhat']
-    ndvi_val = ndvi_pred['yhat']
+    ndvi_val = ndvi_pred.iloc[0]
     
     #now create an instance for the ndwi value
 
@@ -130,7 +130,7 @@ def forecaster(month, year, df):
     ndwi_pred = ndwi_fore.predict(pd.DataFrame(data={'ds': date}, index=[0]))
 
     #ndwi_val = ndwi_pred.loc[-1, 'yhat']
-    ndwi_val = ndwi_pred['yhat']
+    ndwi_val = ndwi_pred.iloc[0]
 
 
     return type(ndvi_val), ndwi_val
