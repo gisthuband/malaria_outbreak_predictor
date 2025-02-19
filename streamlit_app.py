@@ -109,11 +109,11 @@ def forecaster(month, year, df):
     date = f'{int(year)}-{int(month)}-15'
 
     #select the date as 'ds' and values as 'y' for the prophet model to work 
-    ndvi_df = df[['date','ndvi_value']]
-    ndvi_df = ndvi_df.rename(columns={'date':'ds', 'ndvi_value':'y'})
+    ndvi_df = df[['ds','ndvi_value']]
+    ndvi_df = ndvi_df.rename(columns={'ndvi_value':'y'})
 
     ndwi_df = df[['date','ndwi_value']]
-    ndwi_df = ndwi_df.rename(columns={'date':'ds', 'ndwi_value':'y'})
+    ndwi_df = ndwi_df.rename(columns={'ndwi_value':'y'})
     
     #create an instance of a prophet forecaster
     ndvi_fore = Prophet()
