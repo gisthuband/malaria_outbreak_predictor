@@ -71,7 +71,6 @@ def model(df):
     return res
 
 
-def forecaster(dates):
 
 # -----------------------------------------------------------------------------
 # Draw the actual page
