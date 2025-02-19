@@ -135,21 +135,23 @@ def forecaster(month, year, df):
 
     return ndvi_val, ndwi_val
 
+inputs=None
+
 if month and year:
     forecast = forecaster(month, year, df)
 
     st.write(forecast)
 
-inputs = np.array([forecast[0], forecast[1], int(month), 0 ,0 ,0 ,1])
+    inputs = np.array([forecast[0], forecast[1], int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
 
 
 if inputs:
 
-    col_names = ['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']
-    data_dict = dict(zip(col_names, inputs))
-    input_df = pd.DataFrame(data = data_dict)
-    pred = model.predict(input_df)
+    #col_names = ['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']
+    #data_dict = dict(zip(col_names, inputs))
+    #input_df = pd.DataFrame(data = data_dict)
+    pred = model.predict(inputs)
     st.write(preds)
 
 
