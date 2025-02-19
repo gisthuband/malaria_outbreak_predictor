@@ -112,7 +112,7 @@ def forecaster(month, year, df):
     ndvi_df = df[['ds','ndvi_value']]
     ndvi_df = ndvi_df.rename(columns={'ndvi_value':'y'})
 
-    ndwi_df = df[['date','ndwi_value']]
+    ndwi_df = df[['ds','ndwi_value']]
     ndwi_df = ndwi_df.rename(columns={'ndwi_value':'y'})
     
     #create an instance of a prophet forecaster
