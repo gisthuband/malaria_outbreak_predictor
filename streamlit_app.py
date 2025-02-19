@@ -140,7 +140,9 @@ def forecaster(month, year, df):
     return ndvi_val, ndwi_val
 
 
-st.write(ndvi_val, ndwi_vale)
+forecast = forecaster(month, year, df)
+
+st.write(forecast)
 
 inputs = np.array([float(ndvi), float(ndwi), int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
