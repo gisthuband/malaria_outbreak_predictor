@@ -120,7 +120,7 @@ def forecaster(month, year, df):
 
     ndvi_fore.fit(ndvi_df)
 
-    ndvi_pred = ndvi_fore.predict(pd.DataFrame(data={'ds': date}))
+    ndvi_pred = ndvi_fore.predict(pd.DataFrame(data={'ds': date}, index=[0]))
 
     ndvi_pred.head()
 
