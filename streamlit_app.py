@@ -70,6 +70,8 @@ def model(df):
 
     return res
 
+model = model(df)
+
 
 
 # -----------------------------------------------------------------------------
@@ -118,8 +120,6 @@ def forecaster(month, year, df):
 
     ndvi_pred.head()
 
-    #ndvi_val = ndvi_pred.loc[-1, 'yhat']
-    st.write(len(ndvi_pred))
     ndvi_val = ndvi_pred.loc[0, 'yhat']
     
     #now create an instance for the ndwi value
@@ -130,7 +130,6 @@ def forecaster(month, year, df):
 
     ndwi_pred = ndwi_fore.predict(pd.DataFrame(data={'ds': date}, index=[0]))
 
-    #ndwi_val = ndwi_pred.loc[-1, 'yhat']
     ndwi_val = ndwi_pred.loc[0, 'yhat']
 
 
@@ -144,6 +143,10 @@ if month and year:
 inputs = np.array([forecast[0], forecast[1], int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
 
+
+if inputs:
+    pred = model.predict(inputs)
+    st.write(preds)
 
 
 
