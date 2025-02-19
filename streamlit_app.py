@@ -135,7 +135,7 @@ def forecaster(month, year, df):
 
     return ndvi_val, ndwi_val
 
-inputs=None
+inputs = None
 
 if month and year:
     forecast = forecaster(month, year, df)
@@ -146,7 +146,7 @@ if month and year:
     st.write(inputs)
 
 
-if inputs.all() != None:
+#if inputs.all() != None:
 
     #col_names = ['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']
     #data_dict = dict(zip(col_names, inputs))
