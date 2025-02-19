@@ -153,7 +153,7 @@ if month and year:
     #data_dict = dict(zip(col_names, inputs))
     #input_df = pd.DataFrame(data = data_dict)
     pred = model.predict(inputs)
-    st.write(pred.predict_proba())
+    st.write(pred)
 
 
 
