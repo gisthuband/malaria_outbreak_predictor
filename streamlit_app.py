@@ -61,7 +61,7 @@ df = get_data()
 #train the model on the data with the hyperparameter tuned model specifications
 def model(df):
 
-    X = df[[['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']]]
+    X = df[['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']]
     y = df['outbreak']
 
     classifier = LogisticRegression(solver='liblinear', max_iter=100, C=1)
