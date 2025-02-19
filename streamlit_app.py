@@ -124,7 +124,7 @@ def forecaster(month, year, df):
 
     ndvi_pred.head()
 
-    #ndvi_val = ndvi_pred.loc[-1, 'yhat']
+    ndvi_val = ndvi_pred.loc[-1, 'yhat']
     
     #now create an instance for the ndwi value
 
@@ -132,17 +132,17 @@ def forecaster(month, year, df):
 
     ndwi_fore.fit(ndwi_df)
 
-    #ndwi_pred = ndwi_fore.predict(pd.DataFrame(data={'ds': date}))
+    ndwi_pred = ndwi_fore.predict(pd.DataFrame(data={'ds': date}, index=[0]))
 
-    #ndwi_val = ndwi_pred.loc[-1, 'yhat']
+    ndwi_val = ndwi_pred.loc[-1, 'yhat']
 
 
-    #return ndvi_val, ndwi_val
+    return ndvi_val, ndwi_val
 
 if month and year:
     forecast = forecaster(month, year, df)
 
-    st.write(forecast)
+    st.write(forecast[0])
 
 inputs = np.array([float(ndvi), float(ndwi), int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
