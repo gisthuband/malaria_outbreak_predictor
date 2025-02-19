@@ -146,7 +146,7 @@ if month and year:
     st.write(inputs)
 
 
-if inputs.all():
+if inputs.any():
 
     #col_names = ['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']
     #data_dict = dict(zip(col_names, inputs))
