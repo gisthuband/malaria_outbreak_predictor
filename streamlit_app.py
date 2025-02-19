@@ -23,7 +23,7 @@ from folium.plugins import HeatMap
 from sentinelhub import SHConfig, SentinelHubRequest, DataCollection, MimeType, BBox, CRS
 from streamlit.components.v1 import html
 from datetime import date, timedelta
-import prophet
+from prophet import Prophet
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
