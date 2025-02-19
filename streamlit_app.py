@@ -145,7 +145,11 @@ st.write(inputs)
 
 
 if inputs:
-    pred = model.predict(inputs)
+
+    col_names = ['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']
+    data_dict = dict(zip(col_names, inputs))
+    input_df = pd.DataFrame(data = data_dict)
+    pred = model.predict(input_df)
     st.write(preds)
 
 
