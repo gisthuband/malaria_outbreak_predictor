@@ -143,10 +143,10 @@ if month and year:
     st.write(forecast)
 
     inputs = np.array([forecast[0], forecast[1], int(month), 0 ,0 ,0 ,1])
-st.write(inputs)
+    st.write(inputs)
 
 
-if inputs:
+if inputs != None:
 
     #col_names = ['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']
     #data_dict = dict(zip(col_names, inputs))
