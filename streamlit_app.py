@@ -95,12 +95,6 @@ st.write(df.shape)
 ''
 
 
-ndvi = st.number_input('please provide the ndvi value of Sudan')
-st.write(ndvi)
-
-ndwi = st.number_input('please provide the ndwi value of Sudan')
-st.write(ndwi)
-
 month = st.number_input('please provide the month of the year you are looking for (1-12)')
 year = st.number_input('please provide the year you are looking for')
 
@@ -144,9 +138,9 @@ def forecaster(month, year, df):
 if month and year:
     forecast = forecaster(month, year, df)
 
-    st.write(forecast[0])
+    st.write(forecast)
 
-inputs = np.array([float(ndvi), float(ndwi), int(month), 0 ,0 ,0 ,1])
+inputs = np.array([forecast[0], forecast[1], int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
 
 
