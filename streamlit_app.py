@@ -120,9 +120,9 @@ def forecaster(month, year, df):
 
     ndvi_fore.fit(ndvi_df)
 
-    ndvi_fore.head()
+    ndvi_pred = ndvi_fore.predict(pd.DataFrame(data={'ds': date})
 
-    #ndvi_pred = ndvi_fore.predict(pd.DataFrame(data={'ds': date})
+    ndvi_pred.head()
 
     #ndvi_val = ndvi_pred.loc[-1, 'yhat']
     
