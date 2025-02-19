@@ -131,7 +131,7 @@ def forecaster(month, year, df):
 
     ndwi_fore.fit(ndwi_df)
 
-    ndwi_pred = ndwi_fore.predict(pd.Dataframe({'ds': date))
+    ndwi_pred = ndwi_fore.predict(pd.Dataframe(data={'ds': date})
 
     ndwi_val = ndwi_pred.loc[-1, 'yhat']
 
