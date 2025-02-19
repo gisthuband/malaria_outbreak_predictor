@@ -137,7 +137,7 @@ def forecaster(month, year, df):
     #ndwi_val = ndwi_pred.loc[-1, 'yhat']
 
 
-    return ndvi_val, ndwi_val
+    #return ndvi_val, ndwi_val
 
 if month and year:
     forecast = forecaster(month, year, df)
