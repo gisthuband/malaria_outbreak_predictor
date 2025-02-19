@@ -140,7 +140,7 @@ if month and year:
 
     st.write(forecast)
 
-inputs = np.array([forecast[0], forecast[1], int(month), 0 ,0 ,0 ,1])
+inputs = np.array([forecast[0]['yhat'], forecast[1]['yhat'], int(month), 0 ,0 ,0 ,1])
 st.write(inputs)
 
 
