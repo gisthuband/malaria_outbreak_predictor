@@ -162,7 +162,8 @@ if month and year:
 
     if pred_proba is not None:
 
-        st.write(pred_proba[0,1])
+        st.write(f'the probability of a malaria outbreak not occuring is {pred_proba[0,0]}')
+        st.write(f'the probability of a malaria outbreak occuring is {pred_proba[0,1]}')
 
 
 
