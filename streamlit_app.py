@@ -151,6 +151,11 @@ if month and year:
     pred_proba = model.predict_proba(inputs)
     st.write(pred, pred_proba)
 
+
+
+    #verbally declare the prediction value's interpretation
+    #verbally declare the probablity of the prediction
+    
     if pred == 0:
         
         st.write('the prediction is that there will not be a malaria outbreak')
