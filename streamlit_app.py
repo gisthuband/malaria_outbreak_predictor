@@ -162,7 +162,7 @@ if month and year:
 
     if pred_proba is not None:
 
-        st.write(pred_proba)
+        st.write(pred_proba[0])
 
 
 
