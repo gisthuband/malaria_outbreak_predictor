@@ -80,18 +80,17 @@ model = model(df)
 # Set the title that appears at the top of the page.
 '''
 # Malaria Outbreak Predictor
-# :mosquito
+
 This model predicts the outbreak of malaria in Sudan
 
 '''
 
 ''' 
-below is a test to see if the data is uploading
+This model used the time of year to predict if a malaria outbreak will occur
 
 '''
 
-st.write(df.head())
-st.write(df.shape)
+
 # Add some spacing
 ''
 ''
