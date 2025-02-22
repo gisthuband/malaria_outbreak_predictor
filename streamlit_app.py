@@ -146,11 +146,7 @@ if month and year:
     st.write(inputs)
     inputs = inputs.reshape(1,-1)
     st.write(inputs.shape)
-#if inputs.all() != None:
 
-    #col_names = ['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']
-    #data_dict = dict(zip(col_names, inputs))
-    #input_df = pd.DataFrame(data = data_dict)
     pred = model.predict(inputs)
     pred_proba = model.predict_proba(inputs)
     st.write(pred, pred_proba)
@@ -164,9 +160,9 @@ if month and year:
         st.write('the prediction is that there will be a malaria outbreak')
 
 
-    if pred_proba:
+    if pred_proba is not None:
 
-        st.write(pred_proba[0,1])
+        st.write(pred_proba)
 
 
 
