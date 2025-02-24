@@ -64,7 +64,7 @@ def model(df):
     X = df[['ndvi_value','ndwi_value','month_x','Chad','Ethiopia','South Sudan','Sudan']]
     y = df['outbreak']
 
-    classifier = LogisticRegression(solver='liblinear', max_iter=100, C=1)
+    classifier = LogisticRegression(solver='liblinear', max_iter=100, C=1, class_weight='balanced')
 
     res = classifier.fit(X , y)
 
